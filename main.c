@@ -3,20 +3,23 @@
 #include <string.h>
 #include "my_hash.h"
 
-int main() {
-    HashTable htable;
+int main()
+{
+        HashTable htable;
         ht_init(&htable);
-        
+        //ht_init(&htable, HASH_TABLE_SIZE); 
         int n, i, j, m;
         FILE *fin;
         fin = fopen("student.info", "r");
-        if (fin == NULL) {
+        if (fin == NULL)
+        {
                 printf("student.info file oldsongui\n");
                 exit(1);
         }
         fscanf(fin, "%d", &n);
-        Student x, *p;
-        for (i = 0; i < n; i++) {
+        HashNode x, *p;
+        for (i = 0; i < n; i++)
+        {
                 fscanf(fin, "%s", x.key);
                 ht_insert(&htable, x);
         }
@@ -26,16 +29,17 @@ int main() {
         fscanf(fin, "%d", &m);
         FILE *fout = fopen("output.txt", "w");
 
-        for (i = 0; i < m; i++) {
+        for (i = 0; i < m; i++)
+        {
                 fscanf(fin, "%s", cmd);
-                if (strcmp(cmd, "search") == 0) {
+                if (strcmp(cmd, "search") == 0)
+                {
                         fscanf(fin, "%s", x.key);
                         p = ht_search(&htable, x.key);
-                        student_print(fout, p);
-                } else if (strcmp(cmd, "update") == 0) {
-                        fscanf(fin, "%s", x.key);
-                        ht_update(&htable, x);
-                } else if (strcmp(cmd, "delete") == 0) {
+                        hashnode_print(fout, p);
+                }
+                else if (strcmp(cmd, "delete") == 0)
+                {
                         fscanf(fin, "%s", x.key);
                         ht_del(&htable, x.key);
                 }

@@ -6,7 +6,7 @@
 #include <string.h>
 
 struct HashNode {
-    char key[64]; 
+    char key[50]; 
     int value; 
 };
 typedef struct HashNode HashNode;
@@ -32,17 +32,21 @@ struct HashTable {
 #define HASH_TABLE_SIZE 1000000
 typedef struct HashTable HashTable;
 
-void ht_init(HashTable *, int len);
-void ht_insert(HashTable *, const HashNode );
+void ht_init(HashTable *);
+void ht_insert(HashTable *, const HashNode);
 HashNode *ht_search(HashTable *, const char key[]);
 void ht_del(HashTable *, const char key[]);
 void ht_release(HashTable *);
-unsigned int ht_hash(char key[]);
+int ht_hash(const char key[]);
 void hashnode_print(FILE *, const HashNode *);
 
 void l_push_back(List *, HashNode);
-HashNode *l_search(List *, const char key[]);
-void l_erase(List *, const char key[]);
+void l_push_front(List *, HashNode);
+void l_insert(List *, HashNode, int);
 void l_pop_front(List *);
+void l_pop_back(List *);
+void l_erase(List *, int);
+void l_print(List *);
+Elm *l_search(List *, const char []);
 
 #endif
