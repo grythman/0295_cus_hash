@@ -1,8 +1,10 @@
-#include "DS.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "my_hash.h"
 
-int main()
-{
-        HashTable htable;
+int main() {
+    HashTable htable;
         ht_init(&htable);
         
         int n, i, j, m;
@@ -15,7 +17,7 @@ int main()
         fscanf(fin, "%d", &n);
         Student x, *p;
         for (i = 0; i < n; i++) {
-                fscanf(fin, "%s%s%s", x.ovog, x.ner, x.id);
+                fscanf(fin, "%s", x.key);
                 ht_insert(&htable, x);
         }
         fclose(fin);
@@ -27,15 +29,15 @@ int main()
         for (i = 0; i < m; i++) {
                 fscanf(fin, "%s", cmd);
                 if (strcmp(cmd, "search") == 0) {
-                        fscanf(fin, "%s", x.id);
-                        p = ht_search(&htable, x.id);
+                        fscanf(fin, "%s", x.key);
+                        p = ht_search(&htable, x.key);
                         student_print(fout, p);
                 } else if (strcmp(cmd, "update") == 0) {
-                        fscanf(fin, "%s%s%s", x.ovog, x.ner, x.id);
+                        fscanf(fin, "%s", x.key);
                         ht_update(&htable, x);
                 } else if (strcmp(cmd, "delete") == 0) {
-                        fscanf(fin, "%s", x.id);
-                        ht_del(&htable, x.id);
+                        fscanf(fin, "%s", x.key);
+                        ht_del(&htable, x.key);
                 }
         }
         fclose(fin);

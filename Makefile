@@ -1,16 +1,16 @@
 all: hash
 
-hash.o: hash.c DS.h
-	gcc -c hash.c -o hash.o
+hash.o: my_hash.c my_hash.h
+	gcc -c my_hash.c -o my_hash.o
 
-list.o: list.c DS.h
+list.o: list.c my_hash.h
 	gcc -c list.c -o list.o 
 
-main.o: main.c DS.h
+main.o: main.c my_hash.h
 	gcc -c main.c -o main.o 
 
 hash: hash.o main.o list.o
-	gcc hash.o main.o list.o -o hash -lm
+	gcc my_hash.o main.o list.o -o hash -lm
 
 clean:
 	rm -v *.o hash
